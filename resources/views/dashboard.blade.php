@@ -117,10 +117,13 @@
                         <a href="#" class="btn btn-outline-dark w-100 py-3">
                             <i class="fas fa-store me-2"></i>Export & Import Excel <small class="d-block mt-1">se trouve dans la card produits</small>
  </a>
-
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+    @include('partials._category_chart')
+    @include('partials._store_chart')
     </div>
 @endsection

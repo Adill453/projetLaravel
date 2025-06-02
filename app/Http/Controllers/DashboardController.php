@@ -22,7 +22,30 @@ class DashboardController extends Controller
 {
     public function index(): View
     {       
-        return view('dashboard');
+                $user = Auth::user(); // Fetch user with ID 1
+
+                // Fetch categories with the count of their products
+                $categories = Category::withCount('products')->get();
+
+
+                // Prepare data for the category chart
+                $categoryLabels = $categories->pluck('name');
+                $productCounts = $categories->pluck('products_count');
+        
+                // Fetch stores with the count of their products
+                $stores = Store::withCount('products')->get();
+        
+                // Prepare data for the store chart
+                $storeLabels = $stores->pluck('name');
+                $storeCounts = $stores->pluck('products_count');
+        
+                return view('dashboard', [
+                    'pic' => $user->avatar,
+                    'categoryLabels' => $categoryLabels,
+                    'productCounts' => $productCounts,
+                    'storeLabels' => $storeLabels,
+                    'storeCounts' => $storeCounts
+                ]);
     }
 
     public function customers(): View

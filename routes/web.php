@@ -148,3 +148,6 @@ Route::post("/saveAvatar", [DashboardController::class, 'saveAvatar'])->name("sa
 ## excel
 Route::get('products-export', [ProductController::class, 'export'])->name('products.export');
 Route::post('products-import', [ProductController::class, 'import'])->name('products.import');
+
+#print 
+route::get('/products/print', [ProductController::class, 'print'])->name('products.print');

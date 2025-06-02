@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 class ProductOrderController extends Controller
 {
     public function index()
@@ -32,3 +33,4 @@ class ProductOrderController extends Controller
         return view('products.ordered_products', compact('orders'));
     }
 }
+

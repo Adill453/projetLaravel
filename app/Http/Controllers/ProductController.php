@@ -1,17 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ProductExport;
-use App\Imports\ProductImport;
+use Mpdf\Mpdf;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Exports\ProductExport;
+use App\Imports\ProductImport;
+use Illuminate\Foundation\Auth\User;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -160,5 +162,17 @@ class ProductController extends Controller
             ->havingRaw('COUNT(product_orders.order_id) > 6')
             ->get();
         return view('products.products_more_than_6_orders', compact('products'));
+    }
+        public function print()
+    {
+        $products = Product::with(['category', 'supplier', 'stock'])->get();
+        $data = [
+            'products' => $products,
+        ];
+
+        $mpdf = new Mpdf();
+        $html = view('products.print_pdf', $data)->render();
+        $mpdf->WriteHTML($html);
+        return $mpdf->Output('products.pdf', 'I'); // 'I' for inline display
     }
 }

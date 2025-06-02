@@ -6,6 +6,8 @@
         <div class="col d-flex justify-content-between align-items-center">
             <h2 class="h3 mb-0 ">Product List</h2>
             <div class="d-flex gap-2">
+                <a class="btn btn-info" href="{{ route('products.print') }}" target="_blank"><i class="fa fa-print"></i>
+                    Print</a>
                 <a class="btn btn-outline-warning float-end" href="{{ route('products.export') }}"><i class="fa fa-download"></i> Export Products Data</a>
                 <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
                     data-bs-target="#importProductModal">
